@@ -1,0 +1,21 @@
+development:
+  user_id: 17770555
+  domain: twitter.com
+  path: statuses/user_timeline
+  expire: 10
+  timeout: 1
+  username: jspies 
+staging:
+  user_id: 0
+  domain: twitter.com
+  path: statuses/user_timeline
+  expire: 10
+  timeout: 1
+  username: username
+production:
+  user_id: 0
+  domain: twitter.com
+  path: statuses/user_timeline
+  expire: 10
+  timeout: 1
+  username: username
