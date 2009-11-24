@@ -2,15 +2,21 @@ module TweetHelper
   def twitter_bird(num = 1, rotate = false)
     tweets = Tweet.find_and_store(num)
     if tweets.length > 0
-<<EOF
-    <div id="twitter_bird">
-      <div id="tweet_top"></div>
-      <div id="tweet"><div class="text">#{tweets[0].text}&nbsp;<img class="rquote" src="/images/twitter_bird/rquote.png">
-      </div></div>
-      <div id="tweet_bottom"></div>
-      <div class="posted_at">Posted #{time_ago_in_words(tweets[0].twitter_update_time)} ago</div>
-    </div>
-EOF
+      content_tag(:div, :id => "twitter_bird") do
+        tweets.collect{|t| tweet_bubble(t.text)}
+      end
     end
   end
+
+  def tweet_bubble(tweet)
+    out = ""
+    out << content_tag(:div, nil, :class => "tweet_top")
+    out << content_tag(:div, :class => "tweet") do
+      content_tag(:div, :class => "text") do
+        "#{tweet}&nbsp;<img src=\"/images/twitter_bird/rquote.png\" alt=\"rquote\"/>"
+      end
+    end
+    out << content_tag(:div, nil, :class => "tweet_bottom")
+  end
+
 end
