@@ -39,7 +39,7 @@ class Tweet < ActiveRecord::Base
     if Tweet.pull_feed(TWITTER_CONFIG[:user_id])
       Tweet.delete_all
       @feed.items.each do |i|
-        text = i.title.split(": ")[1].gsub(/https?:\/\/[^\s]*/){|s| "<a href=\"#{s}\">#{s}</a>"}
+        text = i.title.split(": ")[1..-1].join(": ").gsub(/https?:\/\/[^\s]*/){|s| "<a href=\"#{s}\">#{s}</a>"}
         t = Tweet.create({:text => text, :twitter_username => @username, :twitter_update_time => i.pubDate.to_s})
       end
     end
